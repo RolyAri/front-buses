@@ -13,7 +13,13 @@ const BusList: React.FC = () => {
   const [idBus, setIdBus] = useState(0);
 
   const getBuses = async(page: number, rowsPerPage: number) => {
-    fetch(`http://localhost:8080/bus?size=${rowsPerPage}&page=${page}`)
+    fetch(`http://localhost:8080/bus?size=${rowsPerPage}&page=${page}`,{
+      method: 'GET',
+      //credenciales en base 64
+      headers: {
+        'Authorization': 'Basic ' + btoa('user:password'),
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setBuses(data)

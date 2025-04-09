@@ -21,7 +21,13 @@ const DialogBus: React.FC<DialogProps> = ({open, setOpen, idBus}) => {
     };
 
     const getBusById = async (id: number) => {
-        await fetch(`http://localhost:8080/bus/${id}`)
+        await fetch(`http://localhost:8080/bus/${id}`,{
+            method: 'GET',
+            //credenciales en base 64
+            headers: {
+            'Authorization': 'Basic ' + btoa('user:password'),
+            },
+        })
         .then((response) => response.json())
         .then((data) => {
             setBus(data);
